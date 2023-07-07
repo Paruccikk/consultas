@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Consultas</title>
+  <link rel="stylesheet" href="app.css" />
+  <link rel="icon" href="logo.ico" type="image/x-icon">
+
+<!-- Firebase App (obrigatório) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Realtime Database (se você estiver usando o banco de dados em tempo real) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="app.html"> Contulas </a>
+      <div class="mobile-menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+      <ul class="nav-list">
+        <li><a href="app.html">Consultas</a></li>
+        <li><a href="servicos.html">Plan..</a></li>
+        <li><a href="orcamento.html">Plan..</a></li>
+      </ul>
+    </nav>
+  </header>
+     
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Adicionar ao Banco de Dados</title>
+</head>
+<body>
+
+  <form id="seu-formulario">
+    <input type="text" id="meioTX" placeholder="Meio TX">
+    <input type="text" id="interfaceA" placeholder="INTERFACE (A)">
+    <input type="text" id="host" placeholder="HOST">
+    <input type="text" id="interfaceB" placeholder="INTERFACE (B)">
+    <input type="text" id="switch" placeholder="SWITCH">
+    <input type="text" id="armario" placeholder="ARMARIO">
+    <input type="text" id="vlans" placeholder="VLANs">
+    <input type="text" id="operadora" placeholder="Operadora">
+    <input type="text" id="designador" placeholder="Designador">
+    <input type="text" id="eild" placeholder="EILD">
+    <input type="text" id="complemento" placeholder="Complemento">
+    <button id="botao-adicionar" type="submit">Adicionar ao Banco de Dados</button>
+  </form>
+
+  <div id="mensagem"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+  <script>
+    var firebaseConfig = {
+      // Configurações do Firebase
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    var form = document.getElementById("seu-formulario");
+    var mensagem = document.getElementById("mensagem");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Impede o envio do formulário
+
+      // Captura os valores dos campos
+      var meioTX = document.getElementById("meioTX").value;
+      var interfaceA = document.getElementById("interfaceA").value;
+      var host = document.getElementById("host").value;
+      var interfaceB = document.getElementById("interfaceB").value;
+      var switchValue = document.getElementById("switch").value;
+      var armario = document.getElementById("armario").value;
+      var vlans = document.getElementById("vlans").value;
+      var operadora = document.getElementById("operadora").value;
+      var designador = document.getElementById("designador").value;
+      var eild = document.getElementById("eild").value;
+      var complemento = document.getElementById("complemento").value;
+
+      // Envia os valores para o Firebase
+      var db = firebase.firestore();
+      db.collection("sua-colecao").doc(host).set({
+        meioTX: meioTX,
+        interfaceA: interfaceA,
+        host: host,
+        interfaceB: interfaceB,
+        switch: switchValue,
+        armario: armario,
+        vlans: vlans,
+        operadora: operadora,
+        designador: designador,
+        eild: eild,
+        complemento: complemento
+      })
+      .then(function() {
+        console.log("Documento adicionado com ID: ", host);
+        mensagem.textContent = "Adicionado com sucesso!";
+        mensagem.style.color = "green";
+        // Limpa os campos do formulário
+        form.reset();
+      })
+      .catch(function(error) {
+        console.error("Erro ao adicionar documento: ", error);
+        mensagem.textContent = "Falha ao adicionar. Verifique o console para mais detalhes.";
+        mensagem.style.color = "red";
+      });
+    });
+  </script>
+
+  
+    </center>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top" class="footer-contact"></div>
+  <h5>Desenvolvido por <a href="https://www.instagram.com/danielsparucci/" target="_blank"> @danielsparucci </a> Copyrigh ©2023 R.T Vidros. - Todos os direitos reservados.</a></h5>
+  </footer>
+
+  <script src="mobile-navbar.js"></script>
+  <script src="script.js"></script>
+  <div class="footer-bottom"></div>
+</div>
+</body>
+</html>
